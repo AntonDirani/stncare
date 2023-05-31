@@ -1,81 +1,32 @@
 <?php 
 namespace App\Http\Controllers;
+
+use App\Models\Student;
+use App\Models\University;
+use Illuminate\Http\Request;
+
 class StudentController extends Controller {
 
-  /**
-   * Display a listing of the resource.
-   *
-   * @return Response
-   */
-  public function index()
+  public function student_data_entry(Request $request ,$id ,$id2)
   {
+    try{
+    $validate = $request->validate([
+      'verification_card'=>'required',
+      'studying_year'     =>'required'
+    ]);
     
+     $student = Student::create([
+       'user_id'          =>auth()->user()->id,
+       'university_id'    =>$id,
+       'photo_id'         =>$id2,
+       'verification_card'=>$validate['verification_card'],
+       'studying_year'    =>$validate['studying_year'],
+     ]);
+    }catch(\Exception $e){
+    return ['message'=>'An Error Occoured on Entering student data!'];
+    }
+     return $student;
   }
-
-  /**
-   * Show the form for creating a new resource.
-   *
-   * @return Response
-   */
-  public function create()
-  {
-    
-  }
-
-  /**
-   * Store a newly created resource in storage.
-   *
-   * @return Response
-   */
-  public function store()
-  {
-    
-  }
-
-  /**
-   * Display the specified resource.
-   *
-   * @param  int  $id
-   * @return Response
-   */
-  public function show($id)
-  {
-    
-  }
-
-  /**
-   * Show the form for editing the specified resource.
-   *
-   * @param  int  $id
-   * @return Response
-   */
-  public function edit($id)
-  {
-    
-  }
-
-  /**
-   * Update the specified resource in storage.
-   *
-   * @param  int  $id
-   * @return Response
-   */
-  public function update($id)
-  {
-    
-  }
-
-  /**
-   * Remove the specified resource from storage.
-   *
-   * @param  int  $id
-   * @return Response
-   */
-  public function destroy($id)
-  {
-    
-  }
-  
 }
 
 ?>

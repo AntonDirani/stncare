@@ -10,32 +10,32 @@ class Student extends Model {
 
 	public function user()
 	{
-		return $this->belongsTo('App/Models\User', 'user_id');
+		return $this->belongsTo('App\Models\User', 'user_id');
 	}
 
 	public function post()
 	{
-		return $this->hasMany('App/Models\Post', 'student_id');
+		return $this->hasMany('App\Models\Post', 'student_id');
 	}
 
 	public function photo()
 	{
-		return $this->belongsTo('App/Models\Photo', 'photo_id');
+		return $this->belongsTo('App\Models\Photo', 'photo_id');
 	}
 
 	public function studying()
 	{
-		return $this->belongsToMany('App/Models\Studying', 'studying_id');
+		return $this->belongsToMany('App\Models\Studying', 'studying_id');
 	}
 
 	public function university()
 	{
-		return $this->belongsTo('App/Models\University', 'university_id');
+		return $this->belongsTo('App\Models\University', 'university_id');
 	}
 
 	public function queue()
 	{
-		return $this->hasMany('App/Models\Queue', 'student_id');
+		return $this->hasMany('App\Models\Queue', 'student_id');
 	}
 
 }
