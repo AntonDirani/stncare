@@ -45,7 +45,7 @@ class UserController extends Controller {
 
 public function Login(Request $request)
 {
-  try{
+  
   $validate = $request->validate([
     'email'    =>'required|string',
     'password' =>'required'
@@ -66,11 +66,12 @@ public function Login(Request $request)
     'User Details'=>$user,
     'The Token'   =>$token
   ];
-}catch(\Exception $e){
-  return response()->json(['message'=>'an error uccured in login!']);
-}
+
+  //return response()->json(['message'=>'an error uccured in login!']);
+
   return $response;
 }
+
 
 public function Logout(Request $request)
 {

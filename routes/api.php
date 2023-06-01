@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\EmailController;
 use App\Http\Controllers\PatientController;
 use App\Http\Controllers\StudentController;
 use App\Http\Controllers\UserController;
@@ -26,5 +27,6 @@ Route::group(['middleware'=>['auth:api']],function(){
     Route::post('logout',[UserController::class,'Logout'])->name('logout');
     Route::post('patient_data_entry',[PatientController::class,'patient_data_entry'])->name('patient_data_entry')->middleware('patient');
     Route::post('student_data_entry/{id}/{id2}',[StudentController::class,'student_data_entry'])->name('student_data_entry')->middleware('student');
+    //Route::get('sendemail',[EmailController::class,'sendEmail'])->name('sendemail');
 
 });
