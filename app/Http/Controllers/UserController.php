@@ -31,13 +31,13 @@ class UserController extends Controller {
             'role'         => $validate['role'],
         ]);
 
-        $token = $user->createToken('mytoken')->accessToken;
+        $token = $user->createToken('mytoken@FO123')->accessToken;
 
         $response = [
             'User Details :' => $user,
             'The Token'      => $token,
         ];
-      }catch(\Exception $e){
+    }catch(\Exception $e){
         return response()->json(['message'=>'an error uccured in register']);
       }
         return $response;     
@@ -45,7 +45,7 @@ class UserController extends Controller {
 
 public function Login(Request $request)
 {
-  
+  try{
   $validate = $request->validate([
     'email'    =>'required|string',
     'password' =>'required'
@@ -61,15 +61,15 @@ public function Login(Request $request)
   if(!Hash::check($validate['password'], $user->password)){
     return response()->json(['message'=>'Password incorrect!']);
   }
-  $token    = $user->createToken('mytoken')->accessToken;
+  $token    = $user->createToken('mytoken@FO123')->accessToken;
   $response = [
     'User Details'=>$user,
     'The Token'   =>$token
   ];
-
-  //return response()->json(['message'=>'an error uccured in login!']);
-
-  return $response;
+  }catch(\Exception $e){
+    return response()->json(['message'=>'an error uccured in login!']);
+  }
+    return $response;
 }
 
 

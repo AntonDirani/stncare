@@ -32,7 +32,7 @@ public function envelope(): Envelope
     return new Envelope(
         from: new Address('hello@example.com', 'Example'),
         replyTo: [
-            new Address('fabowared@gmail.com', 'Fadi Alkhatib'),
+            new Address('fabowared@gmail.com'),
         ],
         subject: 'Order Shipped',
     );
@@ -55,5 +55,9 @@ public function content(): Content
      *
      * @return array<int, \Illuminate\Mail\Mailables\Attachment>
      */
+    public function attachments(): array
+{
+    return [];
+}
    
 }

@@ -8,9 +8,9 @@ class Treatment extends Model {
 	public $timestamps = true;
 	protected $fillable = array('name', 'description', 'self_diagnosed');
 
-	public function photo()
+	public function photos()
 	{
-		return $this->belongsToMany('App/Models\Photo', 'photo_id', 'treatment_id');
+		return $this->belongsToMany(Photo::class,'treatment_photo', 'treatment_id', 'photo_id');
 	}
 
 	public function post()

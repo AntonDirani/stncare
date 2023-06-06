@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 
 class StudentController extends Controller {
 
-  public function student_data_entry(Request $request ,$id ,$id2)
+  public function student_data_entry(Request $request ,$un_id ,$ph_id)
   {
     try{
     $validate = $request->validate([
@@ -17,8 +17,8 @@ class StudentController extends Controller {
     
      $student = Student::create([
        'user_id'          =>auth()->user()->id,
-       'university_id'    =>$id,
-       'photo_id'         =>$id2,
+       'university_id'    =>$un_id,
+       'photo_id'         =>$ph_id,
        'verification_card'=>$validate['verification_card'],
        'studying_year'    =>$validate['studying_year'],
      ]);
@@ -27,6 +27,8 @@ class StudentController extends Controller {
     }
      return $student;
   }
+
+  
 }
 
 ?>

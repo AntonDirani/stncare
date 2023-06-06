@@ -2,7 +2,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Patient;
+use App\Models\Treatment;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class PatientController extends Controller {
 
@@ -25,6 +27,27 @@ class PatientController extends Controller {
     return response()->json([$patient,'message'=>'Data Added Successfully!']);
   }
  
+  public function Show_treatments()
+  {
+    $select   = Treatment::all();
+    return $select;
+  }
+
+  public function Choose_treatment(Request $request)
+  {
+    try{
+    $treatment_id = Treatment::get('name',$request->id);
+    }catch(\Exception $e){
+      return ['message'=>'An error accoured in choose treatment !'];
+    }
+    return $treatment_id;
+
+  }
+
+  public function Skip()
+  {
+    return 'you are skipped';
+  }
 }
 
 ?>

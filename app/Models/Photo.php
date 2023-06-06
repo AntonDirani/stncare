@@ -8,14 +8,14 @@ class Photo extends Model {
 	public $timestamps = true;
 	protected $fillable = array('image');
 
-	public function post()
+	public function posts()
 	{
-		return $this->belongsToMany('App/Models\Post', 'post_id');
+		return $this->belongsToMany(Post::class,'post_photo','photo_id','post_id');
 	}
 
-	public function treatment()
+	public function treatments()
 	{
-		return $this->belongsToMany('App/Models\Treatment', 'treatment_id', 'photo_id');
+		return $this->belongsToMany(Treatment::class,'tratment_photo' ,'post_id', 'treatment_id');
 	}
 
 	public function student()

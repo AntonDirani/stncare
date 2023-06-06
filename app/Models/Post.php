@@ -28,9 +28,9 @@ class Post extends Model {
 		return $this->belongsTo('App/Models\Student', 'student_id');
 	}
 
-	public function photo()
+	public function photos()
 	{
-		return $this->belongsToMany('App/Models\Photo', 'photo_id');
+		return $this->belongsToMany(Photo::class,'post_photo','post_id','photo_id');
 	}
 
 	public function treatment()

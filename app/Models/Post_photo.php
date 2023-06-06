@@ -8,7 +8,7 @@ class Post_photo extends Model {
 	public $timestamps = true;
 	protected $fillable = array('post_id', 'photo_id');
 
-	public function post()
+	/*public function post()
 	{
 		return $this->hasMany('App/Models\Post');
 	}
@@ -16,6 +16,6 @@ class Post_photo extends Model {
 	public function photo()
 	{
 		return $this->hasMany('App/Models\Photo');
-	}
+	}*/
 
 }
