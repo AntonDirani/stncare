@@ -1,81 +1,53 @@
 <?php 
 namespace App\Http\Controllers;
+
+use App\Models\Subject;
+use Illuminate\Http\Request;
+
 class SubjectController extends Controller {
 
-  /**
-   * Display a listing of the resource.
-   *
-   * @return Response
-   */
-  public function index()
+  public function Add_subject_to_the_app(Request $request,$tr_id)
   {
-    
+    try{
+    $validate = $request->validate([
+      'name'=>'required',
+      'year'=>'required'
+    ]);
+    $add = Subject::create([
+      'treatment_id'=>$tr_id,
+      'name'=>$validate['name'],
+      'year'=>$validate['year']
+    ]);
+  }catch(\Exception $e){
+    return ['error'=>'An Error occoured when add subject !'];
+  }
+    return ['subject Added successfully!',$add];
   }
 
-  /**
-   * Show the form for creating a new resource.
-   *
-   * @return Response
-   */
-  public function create()
-  {
-    
-  }
+public function Edit_subject_in_the_app(Request $request,$id)
+{
+  try{
+  $edit = Subject::where('id',$id)->update([
+    'treatment_id'=>$request->treatment_id,
+    'name'        =>$request->name,
+    'year'        =>$request->year
+  ]);
+}catch(\Exception $e){
+  return ['error'=>'An Error occoured when Edite subject !'];
+}
+  return ['Subject Edited successfully!',$edit];
+}
 
-  /**
-   * Store a newly created resource in storage.
-   *
-   * @return Response
-   */
-  public function store()
-  {
-    
-  }
 
-  /**
-   * Display the specified resource.
-   *
-   * @param  int  $id
-   * @return Response
-   */
-  public function show($id)
+  public function Delete_subject_from_the_app ($id)
   {
-    
+    try{
+    Subject::where('id',$id)->delete();
+    }catch(\Exception $e){
+      return ['error'=>'An Error occoured when delete subject !'];
+    }
+    return 'Subject Deleted successfully!';
   }
-
-  /**
-   * Show the form for editing the specified resource.
-   *
-   * @param  int  $id
-   * @return Response
-   */
-  public function edit($id)
-  {
-    
-  }
-
-  /**
-   * Update the specified resource in storage.
-   *
-   * @param  int  $id
-   * @return Response
-   */
-  public function update($id)
-  {
-    
-  }
-
-  /**
-   * Remove the specified resource from storage.
-   *
-   * @param  int  $id
-   * @return Response
-   */
-  public function destroy($id)
-  {
-    
-  }
-  
 }
 
 ?>

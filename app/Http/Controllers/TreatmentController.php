@@ -11,16 +11,16 @@ class TreatmentController extends Controller {
 
   public function Treatment_photo($id,$id1){
         
-    //try{
+    try{
         $photo_id       = Photo:: where('id',$id1)->get('id'); 
         $treatment      = Treatment::find($id);
         $photo_Id       =  $photo_id;
 
         $treatment->photos()->attach($photo_Id);
-    //}catch(\Exception $e){
-      //  return response()->json(['message'=>'an error uccored']);
+    }catch(\Exception $e){
+      return response()->json(['message'=>'an error uccored']);
 
-    //}
+    }
         return response()->json(['message'=>'photo added successfully! ']);
 
 

@@ -1,79 +1,50 @@
 <?php 
 namespace App\Http\Controllers;
+
+use App\Models\University;
+use Illuminate\Http\Request;
+
 class UniversityController extends Controller {
 
-  /**
-   * Display a listing of the resource.
-   *
-   * @return Response
-   */
-  public function index()
+  public function Add_university_to_the_app(Request $request)
   {
-    
+    try{
+    $validate = $request->validate([
+      'name'=>'required',
+      'location'=>'required'
+    ]);
+    $add = University::create([
+      'name'    =>$validate['name'],
+      'location'=>$validate['location']
+    ]);
+  }catch(\Exception $e){
+    return ['error'=>'An Error occoured when add university !'];
+  }
+    return ['University Added successfully!',$add];
   }
 
-  /**
-   * Show the form for creating a new resource.
-   *
-   * @return Response
-   */
-  public function create()
-  {
-    
-  }
+public function Edit_university_in_the_app(Request $request,$id)
+{
+  try{
+  $edit = University::where('id',$id)->update([
+    'name'        =>$request->name,
+    'location'        =>$request->location
+  ]);
+}catch(\Exception $e){
+  return ['error'=>'An Error occoured when Edit university !'];
+}
+  return ['University Edited successfully!',$edit];
+}
 
-  /**
-   * Store a newly created resource in storage.
-   *
-   * @return Response
-   */
-  public function store()
-  {
-    
-  }
 
-  /**
-   * Display the specified resource.
-   *
-   * @param  int  $id
-   * @return Response
-   */
-  public function show($id)
+  public function Delete_university_from_the_app ($id)
   {
-    
-  }
-
-  /**
-   * Show the form for editing the specified resource.
-   *
-   * @param  int  $id
-   * @return Response
-   */
-  public function edit($id)
-  {
-    
-  }
-
-  /**
-   * Update the specified resource in storage.
-   *
-   * @param  int  $id
-   * @return Response
-   */
-  public function update($id)
-  {
-    
-  }
-
-  /**
-   * Remove the specified resource from storage.
-   *
-   * @param  int  $id
-   * @return Response
-   */
-  public function destroy($id)
-  {
-    
+    try{
+    University::where('id',$id)->delete();
+    }catch(\Exception $e){
+      return ['error'=>'An Error occoured when delete university !'];
+    }
+    return 'University Deleted successfully!';
   }
   
 }
